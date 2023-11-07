@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
 Bootstrap5(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URI', 'sqlite:///bincomphptest.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///bincomphptest.db'
 db = SQLAlchemy(app)
 
 class Agentname(db.Model):
