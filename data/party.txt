@@ -1,0 +1,10 @@
+INSERT INTO `party` (`id`, `partyid`, `partyname`) VALUES
+(1, 'PDP', 'PDP'),
+(2, 'DPP', 'DPP'),
+(3, 'ACN', 'ACN'),
+(4, 'PPA', 'PPA'),
+(5, 'CDC', 'CDC'),
+(6, 'JP', 'JP'),
+(7, 'ANPP', 'ANPP'),
+(8, 'LABOUR', 'LABOUR'),
+(9, 'CPP', 'CPP');

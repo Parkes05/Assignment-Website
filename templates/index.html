@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+    <h1>Welcome User!</h1>
+    {% if not sum: %}
+    <form method="POST" action="{{ url_for('result') }}">
+    {% else: %}
+    <form method="POST" action="{{ url_for('sum') }}">
+    {% endif %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    {% if not sum: %}
+                    <h2>Select a polling unit to view result</h2>
+                    {% else: %}
+                    <h2>Select a local government to view polling result</h2>
+                    {% endif %}
+                    {% if not sum: %}
+                    <select name="comp_select" class="form-select">
+                        <option selected disabled>Choose option</option>
+                        {% for i in pu: %}
+                        {% if i.polling_unit_name != '': %}
+                        <option value="{{ i.polling_unit_id }}">{{i.polling_unit_name}}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    {% else: %}
+                    <select name="comp_select" class="form-select">
+                        <option selected disabled>Choose option</option>
+                        {% for i in lga: %}
+                        {% if i.lga_name != '': %}
+                        <option value="{{ i.lga_id }}">{{i.lga_name}}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    {% endif %}
+                    <button type="submit" class="btn btn-success">Check</button>
+                </div>
+
+                <div class="col-sm-8">
+                    <div class="table-responsive-sm">
+                        <table class="table table-bordered">
+                            {% if party: %}
+                            <thead class="table-success">
+                                <tr>
+                                    {% for i in party %}
+                                    <th>{{i}}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    {% for i in score %}
+                                    <td>{{i}}</td>
+                                    {% endfor %}
+                                </tr>
+                            </tbody>
+                            {% endif %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% if not sum: %}
+            <p>To view the polling results by local government goto: <a href="{{ url_for('sum') }}" >LGA-result</a></p>
+            <p>To add new polling results goto: <a href="{{ url_for('update') }}" >New-result</a></p>
+            {% else: %}
+            <p>To add new polling results goto: <a href="{{ url_for('update') }}" >New-result</a></p>
+            {% endif %}
+        </div>
+    </form>
+</section>
+{% endblock %}
